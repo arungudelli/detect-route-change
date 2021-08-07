@@ -15,6 +15,7 @@ export class AppComponent {
     this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationStart) {
             // Show loading indicator
+            console.log('Route change detected');
         }
 
         if (event instanceof NavigationEnd) {
