@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,28 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'detect-route-change';
+  currentRoute: string;
+
+  constructor(private router: Router) {
+    this.currentRoute = "";
+    this.router.events.subscribe((event: Event) => {
+        if (event instanceof NavigationStart) {
+            // Show loading indicator
+        }
+
+        if (event instanceof NavigationEnd) {
+            // Hide loading indicator
+            this.currentRoute = event.url;          
+              console.log(event);
+        }
+
+        if (event instanceof NavigationError) {
+            // Hide loading indicator
+
+            // Present error to user
+            console.log(event.error);
+        }
+    });
+
+}
 }
